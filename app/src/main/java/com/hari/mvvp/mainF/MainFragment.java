@@ -25,7 +25,7 @@ public class MainFragment extends BaseFragment implements MainView {
     Button breakButton;
     @BindView(R.id.speedTV)
     TextView speedTV;
-    int currentSpeed = 45,rpm = 5;
+    int currentSpeed = 45, rpm = 5;
     MainPresenter mainPresenter;
 
     public static MainFragment newInstance() {
@@ -44,12 +44,7 @@ public class MainFragment extends BaseFragment implements MainView {
 
         initToolBarFragment(view, activity, "My Bike", statusColor, bgColor, false);
 
-        updateText(activity.getResources().getColor(R.color.Green_Peas));
-    }
-
-    private void updateText(int speedStatus) {
-        speedTV.setText("Current speed: " + currentSpeed);
-        speedTV.setTextColor(speedStatus);
+        mainPresenter.accelerateAction(rpm);
     }
 
     @Nullable
@@ -75,7 +70,8 @@ public class MainFragment extends BaseFragment implements MainView {
     @Override
     public void updateSpeed(int speed, int speedStatus) {
         currentSpeed = speed;
-        updateText(speedStatus);
+        speedTV.setText("Current speed: " + currentSpeed);
+        speedTV.setTextColor(speedStatus);
     }
 
     @Override

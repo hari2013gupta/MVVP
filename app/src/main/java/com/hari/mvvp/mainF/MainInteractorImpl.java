@@ -38,7 +38,7 @@ public class MainInteractorImpl implements MainInteractor {
     @Override
     public void brek(int pwr) {
         int speed = mainPresenterListener.getCurrentSpeed();
-        if (speed < 20) {
+        if (speed <= pwr) {
             speed = 0;
         } else {
             speed = speed - pwr;

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.hari.mvvp.R;
@@ -17,16 +16,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainFragment extends BaseFragment implements MainView {
-    public MainFragment INSTANCE;
-    AppCompatActivity activity;
-    @BindView(R.id.accelerateButton)
-    Button accelerateButton;
-    @BindView(R.id.breakButton)
-    Button breakButton;
     @BindView(R.id.speedTV)
     TextView speedTV;
-    int currentSpeed = 45, rpm = 5;
-    MainPresenter mainPresenter;
+    private MainFragment INSTANCE;
+    private AppCompatActivity activity;
+    private int currentSpeed = 45, rpm = 5;
+    private MainPresenter mainPresenter;
 
     public static MainFragment newInstance() {
         MainFragment f = new MainFragment();
@@ -41,9 +36,7 @@ public class MainFragment extends BaseFragment implements MainView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initToolBarFragment(view, activity, "My Bike", statusColor, bgColor, false);
-
         mainPresenter.accelerateAction(rpm);
     }
 
@@ -80,7 +73,7 @@ public class MainFragment extends BaseFragment implements MainView {
     }
 
     @OnClick({R.id.breakButton, R.id.pwrBreakButton, R.id.accelerateButton})
-    public void onViewClicked(View v) {
+    void onViewClicked(View v) {
         switch (v.getId()) {
             case R.id.breakButton:
                 mainPresenter.breakAction(rpm);

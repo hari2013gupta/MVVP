@@ -1,5 +1,11 @@
 package com.hari.mvvp.mainF;
 
+import android.content.Context;
+
 public interface MainPresenterListener {
-    int decreaseSpeed(int speed);
+    int getCurrentSpeed();
+
+    void updateSpeed(int speed);
+
+    Context getCtx();
 }

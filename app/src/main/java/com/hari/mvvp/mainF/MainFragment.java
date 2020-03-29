@@ -1,10 +1,12 @@
 package com.hari.mvvp.mainF;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.hari.mvvp.R;
 
@@ -12,9 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainFragment extends BaseFragment implements MainView{
+public class MainFragment extends BaseFragment implements MainView {
     public MainFragment INSTANCE;
     AppCompatActivity activity;
     @BindView(R.id.accelerateButton)
@@ -22,8 +24,8 @@ public class MainFragment extends BaseFragment implements MainView{
     @BindView(R.id.breakButton)
     Button breakButton;
     @BindView(R.id.speedTV)
-    Button speedTV;
-    int currentSpeed = 45;
+    TextView speedTV;
+    int currentSpeed = 45,rpm = 5;
     MainPresenter mainPresenter;
 
     public static MainFragment newInstance() {
@@ -40,7 +42,14 @@ public class MainFragment extends BaseFragment implements MainView{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initToolBarFragment(view, activity, "Main Fragment", statusColor, bgColor, false);
+        initToolBarFragment(view, activity, "My Bike", statusColor, bgColor, false);
+
+        updateText(activity.getResources().getColor(R.color.Green_Peas));
+    }
+
+    private void updateText(int speedStatus) {
+        speedTV.setText("Current speed: " + currentSpeed);
+        speedTV.setTextColor(speedStatus);
     }
 
     @Nullable
@@ -54,7 +63,38 @@ public class MainFragment extends BaseFragment implements MainView{
     }
 
     @Override
-    public void showToast(String s) {
+    public void showMessage(String s) {
         showToast(s);
+    }
+
+    @Override
+    public int getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    @Override
+    public void updateSpeed(int speed, int speedStatus) {
+        currentSpeed = speed;
+        updateText(speedStatus);
+    }
+
+    @Override
+    public Context getCtx() {
+        return activity.getBaseContext();
+    }
+
+    @OnClick({R.id.breakButton, R.id.pwrBreakButton, R.id.accelerateButton})
+    public void onViewClicked(View v) {
+        switch (v.getId()) {
+            case R.id.breakButton:
+                mainPresenter.breakAction(rpm);
+                break;
+            case R.id.pwrBreakButton:
+                mainPresenter.pwrBreakAction();
+                break;
+            case R.id.accelerateButton:
+                mainPresenter.accelerateAction(rpm);
+                break;
+        }
     }
 }

@@ -35,6 +35,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class BaseFragment extends Fragment implements MyConstants {
     private String TAG = BaseFragment.class.getSimpleName();
@@ -172,6 +173,13 @@ public class BaseFragment extends Fragment implements MyConstants {
         }
         return true;
     }
+    @Override
+    public void onDestroyView() {
+        unbinder.unbind();
+        super.onDestroyView();
+    }
+
+    Unbinder unbinder;
 
     public void setMargins(View view, int left, int top, int right, int bottom) {
         if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
@@ -257,7 +265,7 @@ public class BaseFragment extends Fragment implements MyConstants {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
     }
 
     public void showToast(String message) {

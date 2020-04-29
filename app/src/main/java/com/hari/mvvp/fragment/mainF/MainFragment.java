@@ -1,4 +1,4 @@
-package com.hari.mvvp.mainF;
+package com.hari.mvvp.fragment.mainF;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hari.mvvp.R;
+import com.hari.mvvp.fragment.BaseFragment;
+import com.hari.mvvp.fragment.quoteF.QuoteFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +18,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainFragment extends BaseFragment implements MainView {
+    String TAG  = MainFragment.class.getSimpleName();
     @BindView(R.id.speedTV)
     TextView speedTV;
-    private MainFragment INSTANCE;
+    private static MainFragment INSTANCE;
     private AppCompatActivity activity;
     private int currentSpeed = 45, rpm = 5;
     private MainPresenter mainPresenter;
@@ -29,8 +32,12 @@ public class MainFragment extends BaseFragment implements MainView {
         return f;
     }
 
-    public MainFragment getInstance() {
+    public static MainFragment getInstance() {
         return INSTANCE;
+    }
+
+    public void openQuoteFragment() {
+        openFragment(activity, QuoteFragment.newInstance(), false);
     }
 
     @Override
@@ -44,7 +51,9 @@ public class MainFragment extends BaseFragment implements MainView {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         INSTANCE = this;
+        setCurrentFragment(TAG);
         activity = (AppCompatActivity) getActivity();
+        setHasOptionsMenu(true);
         mainPresenter = new MainPresenterImpl(this);
 
         return inflater.inflate(R.layout.fragment_main, container, false);

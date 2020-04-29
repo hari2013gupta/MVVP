@@ -1,4 +1,4 @@
-package com.hari.mvvp.mainF;
+package com.hari.mvvp.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.hari.mvvp.MyConstants;
+import com.hari.mvvp.MvpView;
 import com.hari.mvvp.R;
 
 import androidx.annotation.NonNull;
@@ -37,7 +37,7 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class BaseFragment extends Fragment implements MyConstants {
+public class BaseFragment extends UpdateFragmentMenu implements MvpView {
     private String TAG = BaseFragment.class.getSimpleName();
     private ProgressDialog mProgressD;
 

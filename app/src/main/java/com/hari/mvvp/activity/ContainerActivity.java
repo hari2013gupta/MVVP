@@ -1,13 +1,13 @@
-package com.hari.mvvp;
+package com.hari.mvvp.activity;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.hari.mvvp.mainF.MainFragment;
+import com.hari.mvvp.FragmentCallback;
+import com.hari.mvvp.fragment.mainF.MainFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;

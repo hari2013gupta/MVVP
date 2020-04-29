@@ -1,4 +1,4 @@
-package com.hari.mvvp.mainF;
+package com.hari.mvvp.fragment.mainF;
 
 public interface MainPresenter {
     void accelerateAction(int a);

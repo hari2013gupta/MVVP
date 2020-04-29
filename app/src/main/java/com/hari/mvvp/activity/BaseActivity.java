@@ -1,19 +1,15 @@
-package com.hari.mvvp;
+package com.hari.mvvp.activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -30,16 +26,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hari.mvvp.MvpView;
+import com.hari.mvvp.MyConstants;
+import com.hari.mvvp.R;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class BaseActivity extends AppCompatActivity implements MyConstants {
+public class BaseActivity extends AppCompatActivity implements MvpView {
     private String TAG = BaseActivity.class.getSimpleName();
     private ProgressDialog mProgressD;
     private AppCompatActivity activity;
@@ -47,7 +46,7 @@ public class BaseActivity extends AppCompatActivity implements MyConstants {
     public void SummaryDialog(Activity activity, String titleString, String summeryString) {
         final Dialog dialog = new Dialog(activity, R.style.CustomDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.custom_dialog1);
+        dialog.setContentView(R.layout.custom_dialog);
         dialog.setTitle("====Alert Dialog====");
 
         RelativeLayout receiptContainer = (RelativeLayout) dialog.findViewById(R.id.receiptContainer);
